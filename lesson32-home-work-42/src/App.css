@@ -1,0 +1,79 @@
+.App {
+  text-align: center;
+}
+
+.btn {
+  width: 100px;
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+  background: #103fbf;
+  color: white;
+  margin: 7px;
+  transition: 0.3s;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #65aae3;
+  color: #fff;
+}
+
+.todo-value {
+  height: 25px;
+  border-radius: 10px;
+}
+
+.todo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #eef595;
+  width: max-content;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.todo-wrap h2 {
+  font-size: 50px;
+  margin: 0 auto;
+}
+
+.list-todo li {
+  list-style: none;
+  text-align: left;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #d8d8d8;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.list-todo li>span {
+  margin-right: 8px;
+}
+
+input[type="checkbox"] {
+  accent-color: #0b8a12;
+}
+
+.list-todo li>input:checked+span {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.delete-btn {
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 10px;
+  background: #b13909;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+  font-weight: bold;
+}
