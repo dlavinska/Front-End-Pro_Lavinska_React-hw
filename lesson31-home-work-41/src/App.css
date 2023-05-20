@@ -1,0 +1,46 @@
+.App {
+  display: flex;
+  font-size: 25px;
+  gap: 30px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.vote-box {
+  margin: 0 auto;
+}
+
+.smiles-list {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+
+.smiles-list li {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+}
+
+.smiles-list button {
+  cursor: pointer;
+  background-color: transparent;
+  border-style: none;
+  font-size: 25px;
+}
+
+.smiles-list span {
+  font-size: 25px;
+}
+
+.results-btn {
+  width: 150px;
+  height: 30px;
+  margin: 0 auto;
+  color: white;
+  background-color: #007bff;
+  border-color: #007bff;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
