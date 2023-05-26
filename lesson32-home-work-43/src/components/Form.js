@@ -1,61 +1,54 @@
 import React, { useState } from 'react';
 
-const Form = ({ onSubmit, onToggle }) => {
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [phone, setPhone] = useState('');
+const Form = ({ onSubmit, onCancel }) => {
 
-    const changeName = (event) => {
-        setName(event.target.value);
+    const getInitialState = () => ({
+        name: '',
+        surname: '',
+        phone: ''
+    });
+
+    const [values, setValues] = useState(getInitialState);
+
+    const handleChange = (event) => {
+        setValues(state => ({
+            ...state,
+            [event.target.name]: event.target.value
+
+        }));
     }
 
-    const changeSurname = (event) => {
-        setSurname(event.target.value);
-    }
-    
-    const changePhone = (event) => {
-        setPhone(event.target.value);
-    }
-    
-    const submitValues = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-
-        const value = {
-            name,
-            surname,
-            phone
-        }
-
-        onSubmit(value);
+        onSubmit(values);
+        setValues(getInitialState);
         clearState();
     }
 
     const clearState = () => {
-        setName('');
-        setSurname('');
-        setPhone('');
+        setValues('');
     }
 
     return (
-        <form>
+        <form onSubmit = {handleSubmit}>
             <label>
                 Name:
-                <input type="text" value={name} onChange={changeName} />
+                <input type="text" name="name" value={values.name} onChange={handleChange} />
             </label>
 
             <label>
                 Surname:
-                <input type="text" value={surname} onChange={changeSurname} />
+                <input type="text" name="surname" value={values.surname} onChange={handleChange} />
             </label>
             
             <label>
                 Phone:
-                <input type="text" value={phone} onChange={changePhone} />
+                <input type="text" name="phone" value={values.phone} onChange={handleChange} />
             </label>
             
             <div className='form-buttons'>
-                <button className='form-btn-save' onClick={submitValues}>Save</button>
-                <button className='form-btn-cancel' type='button' onClick={() => onToggle()}>Cancel</button>
+                <button className='form-btn-save' type ="submit">Save</button>
+                <button className='form-btn-cancel' type='button' onClick={() => onCancel()}>Cancel</button>
             </div>            
         </form>
     )

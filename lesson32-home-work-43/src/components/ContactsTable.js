@@ -11,28 +11,12 @@ const ContactsTable = () => {
         setContactsData(updatedContacts);
     }
 
-    const tableRows = contactsData.map((info) => {
-        return (
-            <tr key={info.id}>
-                <td>{info.name}</td>
-                <td>{info.surname}</td>
-                <td>{info.phone}</td>
-                <td>
-                    <button className='remove-btn' onClick={() => handleDelete(info.id)}>Delete</button>
-                </td>
-            </tr>
-        )
-    })
-
     const handleSave = (data) => {
-        data.id = Date.now();
-        const updatedContactsData = [...contactsData];
-        updatedContactsData.push(data);
-        setContactsData(updatedContactsData);
+        setContactsData(state => [...state, {...data, id: Date.now()}]);
     }
 
-    const handleCancel = () => {
-        setShowForm(false);
+    const handleToggle = () => {
+        setShowForm(state => !state);
     }
 
     return (
@@ -47,15 +31,30 @@ const ContactsTable = () => {
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>{tableRows}</tbody>
+                <tbody>
+                    {contactsData.map((info) => (
+                        <tr key={info.id}>
+                            <td>{info.name}</td>
+                            <td>{info.surname}</td>
+                            <td>{info.phone}</td>
+                            <td>
+                                <button
+                                    className='remove-btn'
+                                    onClick={() => handleDelete(info.id)}
+                                >Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
 
             {!showForm && (
-                <button className='add-btn' onClick={() => setShowForm(true)}>Add contact</button>
+                <button className='add-btn' onClick={handleToggle}>Add contact</button>
             )}
 
             {showForm && (
-                <Form onSubmit={handleSave} onToggle = {handleCancel} />
+                <Form onSubmit={handleSave} onCancel = {handleToggle} />
             )}
 
         </div>
