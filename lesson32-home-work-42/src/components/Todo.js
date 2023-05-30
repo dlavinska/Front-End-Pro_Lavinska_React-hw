@@ -18,15 +18,8 @@ const Todo = () => {
         setTodoList(copyList);
     }
 
-    const handleClickFunc = (value) => {
+    const addNewToDo = (newTodo) => {
         const copyList = [...todoList];
-
-        const newTodo = {
-            "userId": 1,
-            "id": Math.random(),
-            "title": value,
-            "completed": false
-        }
 
         copyList.push(newTodo);
         setTodoList(copyList);
@@ -58,7 +51,7 @@ const Todo = () => {
                 </ul>
 
                 <CreateNewTodo
-                    handleClickFunc={handleClickFunc}
+                    addNewToDo={addNewToDo}
                 />
             </div>
         </div>
