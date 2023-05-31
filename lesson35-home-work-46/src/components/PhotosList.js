@@ -6,12 +6,11 @@ const PhotosList = () => {
     const [photos, setPhotos] = useState([]);
 
     useEffect(() => {
-        const fetchPhotos = async () => {
+        (async () => {
             const response = await fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`);
             const data = await response.json();
             setPhotos(data);
-        }
-        fetchPhotos()
+        }) ()
     }, [albumId]);
     
     return (
