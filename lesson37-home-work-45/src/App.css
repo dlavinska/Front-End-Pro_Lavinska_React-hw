@@ -1,3 +1,57 @@
-.App {
-  text-align: center;
+.todo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #eef595;
+  width: max-content;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.list-todo li {
+  list-style: none;
+  text-align: left;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #d8d8d8;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.list-todo li>span {
+  margin-left: 5px;
+  margin-right: 8px;
+}
+
+input[type="checkbox"] {
+  accent-color: #0b8a12;
+}
+
+.list-todo li>input:checked+span {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.input-box {
+  display: flex;
+}
+
+.custom-form {
+  width: 400px;
+  height: auto;
+  margin: 20px auto;
+}
+
+.delete-all-box {
+  margin: 0 auto;
+}
+
+.btn-box {
+  margin-left: auto;
+}
+
+.box-add-btn {
+  margin-left: 8px;
 }
