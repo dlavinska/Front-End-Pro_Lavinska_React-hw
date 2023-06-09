@@ -1,4 +1,4 @@
-import { ADD_TODO, LOADING_TODOS_START, LOADING_TODOS_SUCCESS, LOADING_TODOS_FAILED, REMOVE_TODO, UPDATE_CHECKBOX, DELETE_ALL } from "./constants";
+import { ADD_TODO, LOADING_TODOS_START, LOADING_TODOS_SUCCESS, LOADING_TODOS_FAILED, REMOVE_TODO, UPDATE_CHECKBOX } from "./constants";
 
 const initialState = {
     todos: [],
@@ -49,11 +49,6 @@ export const operationsReducer = (state = initialState, action) => {
                     }
                     return item;
                 })
-            }
-        
-        case DELETE_ALL:
-            return {
-                todos: []
             }
         
         default:

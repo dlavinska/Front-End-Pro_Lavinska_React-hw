@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from "./Button";
 import { useDispatch } from 'react-redux';
-import { addNewToDo } from '../store/actions';
+import { addTodo } from '../store/actions';
 
 const CreateTodo = () => {
     const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const CreateTodo = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addNewToDo(inputValue));
+        dispatch(addTodo(inputValue));
         setInputValue('');
     }
 

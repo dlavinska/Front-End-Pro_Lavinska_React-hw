@@ -1,15 +1,11 @@
-import {ADD_TODO, LOADING_TODOS_START, LOADING_TODOS_SUCCESS, LOADING_TODOS_FAILED, REMOVE_TODO, UPDATE_CHECKBOX, DELETE_ALL } from "./constants";
-export const addNewToDo = (title) => {
-    const newTodo = {
-        id: Date.now(),
-        title,
-        completed: false
-    };
+import {ADD_TODO, LOADING_TODOS_START, LOADING_TODOS_SUCCESS, LOADING_TODOS_FAILED, REMOVE_TODO, UPDATE_CHECKBOX} from "./constants";
+import axios from 'axios';
 
-    return {
-        type: ADD_TODO,
-        payload: newTodo
-    }
+export const addNewToDo = (todo) => {
+  return {
+    type: ADD_TODO,
+    payload: todo
+  }
 }
 
 export const loadingTodosStartAction = () => {
@@ -46,25 +42,50 @@ export const handleCheck = (id) => {
     }
 }
 
-export const deleteAll = () =>{
-    return {
-        type: DELETE_ALL
-    }
-}
-
 const BASE_ENDPOINT = "https://647d98a8af9847108549f46e.mockapi.io/todos";
+const handleError = error => console.log("Error with data", error);
 
-export const loadTodos = () => {
-  return (dispatch) => {
-    fetch(BASE_ENDPOINT)
-      .then((response) => {
-       return response.json();
+export const getTodos = () => {
+  return dispatch => {
+    axios
+      .get(`${BASE_ENDPOINT}`)
+      .then(response => {
+        dispatch(loadingTodosSucessAction(response.data));
       })
-      .then((data) => {
-        dispatch(loadingTodosSucessAction(data.slice(0, 10)));
+      .catch(loadingTodosFailedAction(handleError));
+  };
+  
+};
+
+export const addTodo = (title) => {
+  return dispatch => {
+    axios
+      .post(`${BASE_ENDPOINT}`, {title, completed: false})
+      .then(response => {
+        dispatch(addNewToDo(response.data));
       })
-      .catch ((error) => {
-        dispatch(loadingTodosFailedAction(error));
-      })
-  }
-}
+      .catch(loadingTodosFailedAction(handleError));
+  };
+};
+
+export const toggleTodo = (id) => {
+  return dispatch => {
+    axios
+      .put(`${BASE_ENDPOINT}/${id}`, {completed: true})
+      .then(
+        dispatch(handleCheck(id))
+      )
+      .catch(loadingTodosFailedAction(handleError));
+  };
+};
+
+export const deleteTodo = (id) => {
+  return dispatch => {
+    axios
+      .delete(`${BASE_ENDPOINT}/${id}`)
+      .then(
+        dispatch(removeTodo(id))
+      )
+      .catch(loadingTodosFailedAction(handleError));
+  };
+};

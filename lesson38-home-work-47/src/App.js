@@ -2,33 +2,28 @@ import './App.css';
 import CreateTodo from "./components/CreateTodo";
 import TodoItem from "./components/TodoItem";
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteAll } from './store/actions';
-import Button from "./components/Button";
+import { getTodos } from '../src/store/actions';
+import React, { useEffect } from 'react';
 
 function App() {
   const dispatch = useDispatch();
-  const todos = useSelector(state => state.todos.todos);
+  const loading = useSelector(state => state.todos.loading);
+
+    useEffect(() => {
+      dispatch(getTodos());
+    }, [dispatch])  
 
   return (
     <div className="todo-wrap">
       <h1 className="text-center">TODO-APP USING REACT-REDUX</h1>
+
+      {loading && <div>loading...</div>}
+
       <CreateTodo />
 
       <ul className='list-todo'>
         <TodoItem />
       </ul>
-
-      {todos.length > 1 && (
-        <div className='delete-all-box'>
-          <Button
-            variant="danger"
-            onClick={() => dispatch(deleteAll())}
-            style = {{margin: '0 auto'}}
-          >
-            DELETE ALL
-          </Button>
-        </div>
-      )}
 
     </div>
   );
